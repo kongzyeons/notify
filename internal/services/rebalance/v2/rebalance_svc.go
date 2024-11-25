@@ -119,39 +119,39 @@ func (self *rebalaceSvc) Run() error {
 		}
 	}
 
-	records, err := self.readCSV(self.pathName + self.params.FileName)
-	if err != nil {
-		log.Println(err)
-		res := models.Response[any]{
-			Title:   fmt.Sprintf("Rebalance Bitkub %s", self.params.Name),
-			Status:  false,
-			Code:    500,
-			Message: "error read csv",
-			Data:    nil,
-		}
-		jsonData, _ := json.MarshalIndent(res, "", "   ")
-		if err := self.lineAPI.SendMessage(string(jsonData)); err != nil {
-			log.Println(err)
-			return err
-		}
-		return err
-	}
-	if len(records) == 0 {
-		log.Println("not found data")
-		res := models.Response[any]{
-			Title:   fmt.Sprintf("Rebalance Bitkub %s", self.params.Name),
-			Status:  false,
-			Code:    500,
-			Message: "not found data",
-			Data:    nil,
-		}
-		jsonData, _ := json.MarshalIndent(res, "", "   ")
-		if err := self.lineAPI.SendMessage(string(jsonData)); err != nil {
-			log.Println(err)
-			return err
-		}
-		return err
-	}
+	// records, err := self.readCSV(self.pathName + self.params.FileName)
+	// if err != nil {
+	// 	log.Println(err)
+	// 	res := models.Response[any]{
+	// 		Title:   fmt.Sprintf("Rebalance Bitkub %s", self.params.Name),
+	// 		Status:  false,
+	// 		Code:    500,
+	// 		Message: "error read csv",
+	// 		Data:    nil,
+	// 	}
+	// 	jsonData, _ := json.MarshalIndent(res, "", "   ")
+	// 	if err := self.lineAPI.SendMessage(string(jsonData)); err != nil {
+	// 		log.Println(err)
+	// 		return err
+	// 	}
+	// 	return err
+	// }
+	// if len(records) == 0 {
+	// 	log.Println("not found data")
+	// 	res := models.Response[any]{
+	// 		Title:   fmt.Sprintf("Rebalance Bitkub %s", self.params.Name),
+	// 		Status:  false,
+	// 		Code:    500,
+	// 		Message: "not found data",
+	// 		Data:    nil,
+	// 	}
+	// 	jsonData, _ := json.MarshalIndent(res, "", "   ")
+	// 	if err := self.lineAPI.SendMessage(string(jsonData)); err != nil {
+	// 		log.Println(err)
+	// 		return err
+	// 	}
+	// 	return err
+	// }
 
 	var data ResponseReblance
 	data.DateTime = time.Now().In(self.loc)
@@ -252,10 +252,10 @@ func (self *rebalaceSvc) Run() error {
 			log.Println(err)
 			return err
 		}
-		if err := self.writeCSV(self.pathName+self.params.FileName, data, records); err != nil {
-			log.Println(err)
-			return err
-		}
+		// if err := self.writeCSV(self.pathName+self.params.FileName, data, records); err != nil {
+		// 	log.Println(err)
+		// 	return err
+		// }
 	}
 
 	//withdraw
